@@ -1,8 +1,13 @@
 package com.bgrebennikovv.github.socialapp.ui.fragments.authorized
 
-import androidx.fragment.app.Fragment
+import com.bgrebennikovv.github.socialapp.databinding.FragmentUserProfileBinding
+import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
 
 
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(
+    FragmentUserProfileBinding::inflate
+) {
+
+
 
 }
