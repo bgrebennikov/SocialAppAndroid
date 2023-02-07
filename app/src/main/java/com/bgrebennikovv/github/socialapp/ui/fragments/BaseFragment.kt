@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 import com.bgrebennikovv.github.socialapp.R
 
-class BaseFragment<T : ViewBinding>(
+open class BaseFragment<T : ViewBinding>(
     private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> T
 ) : Fragment() {
 
