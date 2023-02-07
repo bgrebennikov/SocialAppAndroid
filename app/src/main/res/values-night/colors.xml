@@ -13,7 +13,7 @@
     <color name="blue">#448CE1</color>
     <color name="dark_blue">#111620</color>
 
-    <color name="bgColor">@color/base_white</color>
-    <color name="textColor">@color/base_black</color>
-    
+    <color name="bgColor">@color/base_black</color>
+    <color name="textColor">@color/base_white</color>
+
 </resources>
