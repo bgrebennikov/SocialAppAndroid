@@ -1,16 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.unauthorized.LoginFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.unauthorized.LoginFragment"
+    android:padding="12dp"
+    android:background="@drawable/bg"
+    >
 
+
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name_text"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:id="@+id/app_title"
+            android:fontFamily="@font/roboto_medium"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_screen_app_description"
+            android:textColor="@color/white"
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="@string/email_text"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="filled"
+            android:layout_marginTop="24dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            android:alpha="0.8"
+            style="@style/login_text_input">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/base_black"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="@string/password_text"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            android:alpha="0.8"
+            style="@style/login_text_input">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/login_btn_text"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/login_btn"
+            app:backgroundTint="@color/blue"
+            />
+    </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:textSize="36sp"
-        android:textColor="@color/black"
-        android:layout_height="match_parent"
-        android:text="Login Fragment" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password_text"
+        android:padding="12dp"
+        android:textAlignment="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
