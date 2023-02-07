@@ -2,4 +2,10 @@
     <string name="app_name">SocialApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_btn_text">Войти</string>
+    <string name="password_text">Пароль</string>
+    <string name="email_text">Email</string>
+    <string name="app_name_text">Intraverse</string>
+    <string name="login_screen_app_description">Some description which i not passed</string>
+    <string name="forgot_password_text">Забыли пароль?</string>
 </resources>
