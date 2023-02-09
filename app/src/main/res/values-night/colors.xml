@@ -16,4 +16,7 @@
     <color name="bgColor">@color/base_black</color>
     <color name="textColor">@color/base_white</color>
 
+    <color name="splash_screen_background">@color/base_black</color>
+    <color name="logo_fill_color">@color/base_white</color>
+
 </resources>
