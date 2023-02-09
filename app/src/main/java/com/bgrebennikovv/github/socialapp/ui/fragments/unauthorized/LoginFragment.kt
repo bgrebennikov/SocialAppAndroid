@@ -33,7 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 ).show()
 
                 StatusResponse.API_ERROR -> {
-                    binding.emailInput.error = it.errors[0].message
+                    Toast.makeText(context, it.errors[0].message, Toast.LENGTH_SHORT).show()
                 }
 
                 StatusResponse.SUCCESS -> {
