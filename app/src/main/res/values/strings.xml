@@ -7,5 +7,6 @@
     <string name="email_text">Email</string>
     <string name="app_name_text">Intraverse</string>
     <string name="login_screen_app_description">Some description which i not passed</string>
-    <string name="forgot_password_text">Забыли пароль?</string>
+    <string name="restore_password_text">Восстановить пароль</string>
+    <string name="sign_up_text">Зарегистрироваться</string>
 </resources>
