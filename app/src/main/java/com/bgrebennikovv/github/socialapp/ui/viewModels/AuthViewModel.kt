@@ -9,7 +9,7 @@ import com.bgrebennikovv.github.socialapp.data.models.login.LoginResponse
 import com.bgrebennikovv.github.socialapp.useCases.LoginUserUseCase
 import kotlinx.coroutines.launch
 
-class LoginViewModel(
+class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase
 ) : ViewModel() {
 

@@ -8,7 +8,7 @@ import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
-import com.bgrebennikovv.github.socialapp.ui.viewModels.LoginViewModel
+import com.bgrebennikovv.github.socialapp.ui.viewModels.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
@@ -17,14 +17,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ), KoinComponent {
 
-    private val loginViewModel: LoginViewModel by viewModel()
+    private val authViewModel: AuthViewModel by viewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        loginViewModel.getLoginResult().observe(viewLifecycleOwner, Observer {
+        authViewModel.getLoginResult().observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 StatusResponse.LOADING -> Toast.makeText(
                     context,
@@ -47,7 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
 
         binding.loginBtn.setOnClickListener {
-            loginViewModel.login(
+            authViewModel.login(
                 binding.email.text.toString(),
                 binding.password.text.toString()
             )
