@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/root_nav"
+        tools:layout="@layout/fragment_login"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
