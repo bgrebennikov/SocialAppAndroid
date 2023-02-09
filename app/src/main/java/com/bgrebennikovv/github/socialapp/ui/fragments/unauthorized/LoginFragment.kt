@@ -1,11 +1,27 @@
 package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.bgrebennikovv.github.socialapp.R
+import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
+import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
+import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
+import com.bgrebennikovv.github.socialapp.ui.viewModels.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+
+
+class LoginFragment : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate
+), KoinComponent {
+
+    private val loginViewModel: LoginViewModel by viewModel()
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
