@@ -1,18 +1,12 @@
 package com.bgrebennikovv.github.socialapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
 import com.bgrebennikovv.github.socialapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    private val navHostFragment by lazy {
-        supportFragmentManager.findFragmentById(R.id.root_fragment_container) as NavHostFragment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
