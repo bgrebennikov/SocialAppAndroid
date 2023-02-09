@@ -1,9 +1,10 @@
-package com.bgrebennikovv.github.socialapp
+package com.bgrebennikovv.github.socialapp.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.ui.viewModels.AppSettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,4 +1,4 @@
-package com.bgrebennikovv.github.socialapp
+package com.bgrebennikovv.github.socialapp.ui
 
 import android.os.Bundle
 import com.bgrebennikovv.github.socialapp.databinding.ActivityMainBinding
