@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 import com.bgrebennikovv.github.socialapp.R
+import com.bgrebennikovv.github.socialapp.ui.viewModels.AppSettingsViewModel
+import org.koin.android.ext.android.inject
 
 open class BaseFragment<T : ViewBinding>(
     private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> T
 ) : Fragment() {
+
+    val settingsViewModel : AppSettingsViewModel by inject()
 
     private val navHostRoot by lazy {
         requireActivity().supportFragmentManager.findFragmentById(R.id.root_fragment_container) as NavHostFragment
