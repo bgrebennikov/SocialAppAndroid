@@ -13,8 +13,8 @@ open class BaseFragment<T : ViewBinding>(
     private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> T
 ) : Fragment() {
 
-    val navHostMain by lazy {
-        childFragmentManager.findFragmentById(R.id.root_nav) as NavHostFragment
+    private val navHostRoot by lazy {
+        requireActivity().supportFragmentManager.findFragmentById(R.id.root_fragment_container) as NavHostFragment
     }
 
     private var _binding : T? = null
@@ -32,6 +32,12 @@ open class BaseFragment<T : ViewBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun setRootGraph(graphId : Int){
+        with(navHostRoot.navController){
+            graph = navInflater.inflate(graphId)
+        }
     }
 
 }
