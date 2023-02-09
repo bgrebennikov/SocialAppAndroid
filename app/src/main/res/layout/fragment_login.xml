@@ -47,8 +47,11 @@
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             android:alpha="0.8"
+            app:errorEnabled="true"
+            android:id="@+id/emailInput"
             style="@style/login_text_input">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/base_black"
@@ -69,6 +72,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/password"
+                android:textColor="@color/base_black"
                 android:inputType="textPassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>
