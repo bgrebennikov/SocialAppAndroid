@@ -41,6 +41,12 @@ class DataStoreRepositoryImpl(
         ]
     }
 
+    private suspend fun removeString(key: String){
+        context.dataStore.edit { prefs ->
+            prefs.remove(stringPreferencesKey(key))
+        }
+    }
+
     override suspend fun setString(key: String, value: String) {
         with(context){
             dataStore.edit { prefs ->
