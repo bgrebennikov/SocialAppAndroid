@@ -3,8 +3,8 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.bgrebennikovv.github.socialapp.R
+import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         super.onViewCreated(view, savedInstanceState)
 
 
-        authViewModel.getLoginResult().observe(viewLifecycleOwner, Observer {
+        authViewModel.getLoginResult().observe(viewLifecycleOwner) {
             when (it.status) {
                 StatusResponse.LOADING -> Toast.makeText(
                     context,
@@ -43,7 +43,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
                 }
             }
-        })
+        }
+
+        binding.signUp.setOnClickListener {
+            findRootNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+            )
+        }
 
 
         binding.loginBtn.setOnClickListener {
