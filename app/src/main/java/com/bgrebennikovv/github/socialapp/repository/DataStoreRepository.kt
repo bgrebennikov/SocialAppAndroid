@@ -16,4 +16,6 @@ interface DataStoreRepository {
     suspend fun getRefreshToken() : String?
     suspend fun setRefreshToken(token: String)
 
+    suspend fun logoutUser()
+
 }
