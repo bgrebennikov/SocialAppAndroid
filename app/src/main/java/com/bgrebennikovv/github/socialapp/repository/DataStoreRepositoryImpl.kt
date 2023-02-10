@@ -64,4 +64,9 @@ class DataStoreRepositoryImpl(
     override suspend fun setRefreshToken(token: String) {
         setString(KEY_REFRESH_TOKEN, token)
     }
+
+    override suspend fun logoutUser() {
+        removeString(KEY_ACCESS_TOKEN)
+        removeString(KEY_REFRESH_TOKEN)
+    }
 }
