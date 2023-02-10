@@ -2,6 +2,7 @@ package com.bgrebennikovv.github.socialapp.di
 
 import com.bgrebennikovv.github.socialapp.useCases.LoginUserUseCase
 import com.bgrebennikovv.github.socialapp.useCases.appSettings.GetUserAuthStateUseCase
+import com.bgrebennikovv.github.socialapp.useCases.appSettings.LogoutUserUseCase
 import com.bgrebennikovv.github.socialapp.useCases.appSettings.SetAppThemeOnStartUseCase
 import org.koin.dsl.module
 
@@ -15,5 +16,8 @@ val useCasesModule = module {
     }
     single {
         GetUserAuthStateUseCase()
+    }
+    single {
+        LogoutUserUseCase()
     }
 }
