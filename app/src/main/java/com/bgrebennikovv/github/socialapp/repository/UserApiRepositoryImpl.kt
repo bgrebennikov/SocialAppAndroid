@@ -15,21 +15,29 @@ class UserApiRepositoryImpl : UserApiRepository, KoinComponent {
     private val api: HttpClient by inject()
 
 
-    override suspend fun login(request: LoginRequest): BaseResponse<LoginResponse> {
-
-        val r = api.post("/auth/login"){
+    private suspend inline fun <reified T : Any>makeRequest(endpoint: String, request: Any) : BaseResponse<T>{
+        val r = api.post(endpoint){
             setBody(request)
-        }.body<BaseResponse<LoginResponse>>()
+        }.body<BaseResponse<T>>()
 
         return try {
             BaseResponse.done(r.response, r.errors)
         } catch (e : Exception){
+            e.printStackTrace()
             BaseResponse.error(listOf(
                 ResponseError(
                     message = e.message.toString()
                 )
             ))
         }
+    }
+
+
+    override suspend fun login(request: LoginRequest): BaseResponse<LoginResponse> {
+        return makeRequest(
+            endpoint = "/auth/login",
+            request = request,
+        )
     }
 
 
