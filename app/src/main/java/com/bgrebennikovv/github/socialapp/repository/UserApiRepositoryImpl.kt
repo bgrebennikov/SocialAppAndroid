@@ -1,29 +1,48 @@
 package com.bgrebennikovv.github.socialapp.repository
 
+import android.content.Context
+import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.data.models.login.BaseResponse
 import com.bgrebennikovv.github.socialapp.data.models.login.LoginRequest
 import com.bgrebennikovv.github.socialapp.data.models.login.LoginResponse
 import com.bgrebennikovv.github.socialapp.data.models.login.ResponseError
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.network.sockets.*
 import io.ktor.client.request.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.net.ConnectException
 
-class UserApiRepositoryImpl : UserApiRepository, KoinComponent {
+class UserApiRepositoryImpl(
+    private val context: Context
+) : UserApiRepository, KoinComponent {
 
     private val api: HttpClient by inject()
 
+    private inline fun<reified T> respondError(errorText: Int) : BaseResponse<T>{
+        return BaseResponse.error(listOf(
+            ResponseError(
+                message = context.resources.getString(errorText)
+            )
+        ))
+    }
 
     private suspend inline fun <reified T : Any>makeRequest(endpoint: String, request: Any) : BaseResponse<T>{
-        val r = api.post(endpoint){
-            setBody(request)
-        }.body<BaseResponse<T>>()
-
         return try {
+            val r = api.post(endpoint){
+                setBody(request)
+            }.body<BaseResponse<T>>()
+
             BaseResponse.done(r.response, r.errors)
-        } catch (e : Exception){
-            e.printStackTrace()
+        }
+        catch (e: ConnectTimeoutException){
+            respondError(R.string.ktor_connection_timeout)
+        }
+        catch (e: ConnectException){
+            respondError(R.string.ktor_connection_exception)
+        }
+        catch (e : Exception){
             BaseResponse.error(listOf(
                 ResponseError(
                     message = e.message.toString()
