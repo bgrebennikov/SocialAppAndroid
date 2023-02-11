@@ -19,7 +19,7 @@ internal class BaseApplication : Application() {
                 ktorClientModule,
                 module {
                     single<UserApiRepository> {
-                        UserApiRepositoryImpl()
+                        UserApiRepositoryImpl(get())
                     }
                 },
                 viewModelsModule,
