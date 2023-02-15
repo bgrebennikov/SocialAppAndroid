@@ -8,7 +8,7 @@ import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.ui.viewModels.AppSettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.root_fragment_container) as NavHostFragment
@@ -20,6 +20,7 @@ open class BaseActivity : AppCompatActivity() {
         settingsViewModel.userIsAuthenticated().observe(this@BaseActivity){ state ->
             val graphId : Int = if(state) R.navigation.authorized_nav else R.navigation.unauthorized_nav
             setRootGraph(graphId)
+            return@observe
         }
         super.onCreate(savedInstanceState)
     }
@@ -35,6 +36,18 @@ open class BaseActivity : AppCompatActivity() {
         with(navHostFragment.navController){
             graph = navInflater.inflate(graphId)
         }
+    }
+
+    override fun finishAfterTransition() {
+        super.finishAfterTransition()
+    }
+
+
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
+    )
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }
