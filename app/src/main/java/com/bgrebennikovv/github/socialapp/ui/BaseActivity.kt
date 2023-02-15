@@ -32,7 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
         finish()
     }
 
-    fun setRootGraph(graphId : Int){
+    private fun setRootGraph(graphId : Int){
         with(navHostFragment.navController){
             graph = navInflater.inflate(graphId)
         }
