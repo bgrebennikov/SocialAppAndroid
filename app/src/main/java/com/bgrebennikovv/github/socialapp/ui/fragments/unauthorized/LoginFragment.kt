@@ -3,6 +3,8 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.bgrebennikovv.github.inputvalidator.InputValidator
+import com.bgrebennikovv.github.inui.DefaultStateButton.ButtonStates
 import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
@@ -19,21 +21,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private val authViewModel: AuthViewModel by viewModel()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         authViewModel.getLoginResult().observe(viewLifecycleOwner) {
             when (it.status) {
-                StatusResponse.LOADING -> Toast.makeText(
-                    context,
-                    "Loading...",
-                    Toast.LENGTH_SHORT
-                ).show()
+                StatusResponse.LOADING -> {
+                    binding.loginBtn.setButtonState(ButtonStates.LOADING)
+                }
 
                 StatusResponse.API_ERROR -> {
-                    Toast.makeText(context, it.errors[0].message, Toast.LENGTH_SHORT).show()
+                    binding.loginBtn.setButtonState(ButtonStates.DEFAULT)
+                    Toast.makeText(context, it.errors.first().message, Toast.LENGTH_SHORT).show()
                 }
 
                 StatusResponse.SUCCESS -> {
@@ -51,13 +50,36 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             )
         }
 
+        with(binding) {
+            loginBtn.setOnClickListener {
+                InputValidator.validate {
+                    validatePassword(binding.password.text.toString()) {
+                        onError {
+                            password.error = it
+                        }
+                    }
+                    validateEmail(binding.email.text.toString()) {
+                        params {
+                            allowedDomains = listOf(
+                                "gmail.com"
+                            )
+                        }
+                        onError {
+                            email.error = it
+                        }
+                    }
+                    onSuccessCheck {
+                        authViewModel.login(
+                            email.text.toString(),
+                            password.text.toString()
+                        )
+                    }
+                }
 
-        binding.loginBtn.setOnClickListener {
-            authViewModel.login(
-                binding.email.text.toString(),
-                binding.password.text.toString()
-            )
+            }
+
         }
+
 
     }
 }
