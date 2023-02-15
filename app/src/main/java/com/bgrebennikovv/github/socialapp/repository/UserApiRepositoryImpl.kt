@@ -2,10 +2,7 @@ package com.bgrebennikovv.github.socialapp.repository
 
 import android.content.Context
 import com.bgrebennikovv.github.socialapp.R
-import com.bgrebennikovv.github.socialapp.data.models.login.BaseResponse
-import com.bgrebennikovv.github.socialapp.data.models.login.LoginRequest
-import com.bgrebennikovv.github.socialapp.data.models.login.LoginResponse
-import com.bgrebennikovv.github.socialapp.data.models.login.ResponseError
+import com.bgrebennikovv.github.socialapp.data.models.login.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
@@ -52,11 +49,26 @@ class UserApiRepositoryImpl(
     }
 
 
-    override suspend fun login(request: LoginRequest): BaseResponse<LoginResponse> {
+    override suspend fun login(request: LoginRequest): BaseResponse<AuthResponse> {
         return makeRequest(
-            endpoint = "/auth/login",
+            endpoint = Endpoints.LOGIN,
             request = request,
         )
+    }
+
+    override suspend fun signUp(request: SignupRequest): BaseResponse<AuthResponse> {
+        return makeRequest(
+            endpoint = Endpoints.SIGNUP,
+            request
+        )
+    }
+
+
+
+    companion object{
+        enum class Endpoints(val path: String){
+            LOGIN("/auth/login"), SIGNUP("/auth/signup")
+        }
     }
 
 
