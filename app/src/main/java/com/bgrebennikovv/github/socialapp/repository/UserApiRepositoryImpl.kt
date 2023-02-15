@@ -25,9 +25,9 @@ class UserApiRepositoryImpl(
         ))
     }
 
-    private suspend inline fun <reified T : Any>makeRequest(endpoint: String, request: Any) : BaseResponse<T>{
+    private suspend inline fun <reified T : Any>makeRequest(endpoint: Endpoints, request: Any) : BaseResponse<T>{
         return try {
-            val r = api.post(endpoint){
+            val r = api.post(endpoint.path){
                 setBody(request)
             }.body<BaseResponse<T>>()
 
