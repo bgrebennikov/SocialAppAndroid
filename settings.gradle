@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SocialApp"
 include ':app'
+include ':InUI'
+include ':InputValidator'
