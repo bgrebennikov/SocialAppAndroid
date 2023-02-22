@@ -11,6 +11,8 @@
 
     <!--  Error strings  -->
     <string name="ktor_connection_timeout">Не удалось подключиться к серверу, зайдите чуть позже</string>
-    <string name="ktor_connection_exception">Кажется у нас нет интернета...</string>
+    <string name="ktor_connection_exception">Кажется у нас нет интернета…</string>
+    <string name="login_fail_message_title">Не удалось войти</string>
+    <string name="login_close_alert_btn_text">Закрыть</string>
 
 </resources>
