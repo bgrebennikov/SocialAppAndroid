@@ -23,8 +23,8 @@ open class BaseFragment<T : ViewBinding>(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = inflateMethod.invoke(inflater, container, false)
+    ): View? {
+        if(savedInstanceState == null) _binding = inflateMethod.invoke(inflater, container, false)
         return binding.root
     }
 
