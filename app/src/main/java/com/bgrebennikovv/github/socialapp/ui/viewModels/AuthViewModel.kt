@@ -13,7 +13,7 @@ class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase
 ) : ViewModel() {
 
-    private val loginResult : MutableLiveData<BaseResponse<AuthResponse>> = MutableLiveData<BaseResponse<AuthResponse>>()
+    private val loginResult : MutableLiveData<BaseResponse<AuthResponse>?> = MutableLiveData<BaseResponse<AuthResponse>?>()
 
     fun getLoginResult() = loginResult
 
@@ -26,6 +26,7 @@ class AuthViewModel(
                     email, password
                 )
             )
+            loginResult.postValue(null)
 
         }
     }
