@@ -2,9 +2,9 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.bgrebennikovv.github.inputvalidator.InputValidator
 import com.bgrebennikovv.github.inui.DefaultStateButton.ButtonStates
+import com.bgrebennikovv.github.inui.alerts.InAlert
 import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
@@ -21,25 +21,45 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private val authViewModel: AuthViewModel by viewModel()
 
+    private val inAlert by lazy {
+        InAlert(layoutInflater)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        authViewModel.getLoginResult().observe(viewLifecycleOwner) {
-            when (it.status) {
-                StatusResponse.LOADING -> {
-                    binding.loginBtn.setButtonState(ButtonStates.LOADING)
-                }
+        authViewModel.getLoginResult().observe(viewLifecycleOwner) { response ->
+            response?.let {
+                when (it.status) {
+                    StatusResponse.LOADING -> {
+                        binding.loginBtn.setButtonState(ButtonStates.LOADING)
+                    }
 
-                StatusResponse.API_ERROR -> {
-                    binding.loginBtn.setButtonState(ButtonStates.DEFAULT)
-                    Toast.makeText(context, it.errors.first().message, Toast.LENGTH_SHORT).show()
-                }
+                    StatusResponse.API_ERROR -> {
+                        binding.loginBtn.setButtonState(ButtonStates.DEFAULT)
 
-                StatusResponse.SUCCESS -> {
-                    setRootGraph(R.navigation.authorized_nav)
-                }
-                else -> {
+                        inAlert{
+                            title = context?.getString(R.string.login_fail_message_title)
+                            textColor = requireContext().getColor(R.color.textColor)
+                            backgroundColor = requireContext().getColor(R.color.bgColor)
+                            body = it.errors.first().message
 
+                            buttonText = requireContext().getString(R.string.login_close_alert_btn_text)
+                            onConfirm = {
+                                binding.password.text?.clear()
+                                dismiss()
+                            }
+
+                        }.show()
+
+                    }
+
+                    StatusResponse.SUCCESS -> {
+                        setRootGraph(R.navigation.authorized_nav)
+                    }
+                    else -> {
+
+                    }
                 }
             }
         }
