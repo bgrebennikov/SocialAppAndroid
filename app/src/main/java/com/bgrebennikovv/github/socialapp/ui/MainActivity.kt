@@ -1,6 +1,7 @@
 package com.bgrebennikovv.github.socialapp.ui
 
 import android.os.Bundle
+import android.window.OnBackInvokedDispatcher
 import com.bgrebennikovv.github.socialapp.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
@@ -16,6 +17,15 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return  navHostFragment.navController.navigateUp() ||super.onSupportNavigateUp()
+    }
+
+    override fun finishAfterTransition() {
+        super.finishAfterTransition()
+    }
+
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        return super.getOnBackInvokedDispatcher()
     }
 
 }
