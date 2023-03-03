@@ -2,6 +2,7 @@ package com.bgrebennikovv.github.socialapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.bgrebennikovv.github.socialapp.R
@@ -43,11 +44,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
 
-    @Deprecated("Deprecated in Java",
-        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
-    )
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        return super.getOnBackInvokedDispatcher()
     }
 
 }
