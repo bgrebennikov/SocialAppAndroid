@@ -14,5 +14,16 @@
     <string name="ktor_connection_exception">Кажется у нас нет интернета…</string>
     <string name="login_fail_message_title">Не удалось войти</string>
     <string name="login_close_alert_btn_text">Закрыть</string>
+    <string name="next">Далее</string>
+    <string name="signup_page_base_title">Как тебя зовут?</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="city">Город</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повтороте пароль</string>
+    <string name="age">Возраст</string>
+    <string name="enter_email_text">Введи свой Email</string>
+
+    <string name="repeat_password_error_message">Пароли должны быть одинаковыми</string>
 
 </resources>
