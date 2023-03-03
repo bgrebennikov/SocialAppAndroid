@@ -5,22 +5,20 @@ data class EmailParams(
 )
 
 class EmailValidator(
-    private val email: String
+    private val email: String?
 ) : ValidationResult()  {
 
     private var emailParams = EmailParams()
     private val emailDomain = try {
-        email.split("@")[1]
+        email?.split("@")?.get(1)
     } catch (e: java.lang.Exception){
         null
     }
 
     private fun hasErrors() : String?{
-
         with(emailParams){
             if (emailDomain == null) return setError("Invalid email")
-            if(!allowedDomains.contains(emailDomain)) return setError("Domain not allowed")
-
+            if(allowedDomains.isNotEmpty() && !allowedDomains.contains(emailDomain)) return setError("Domain not allowed")
         }
         return null
     }
