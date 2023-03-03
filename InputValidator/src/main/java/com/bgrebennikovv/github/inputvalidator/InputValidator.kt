@@ -6,15 +6,13 @@ class InputValidator() {
         clearErrors()
     }
 
-    private fun clearErrors(){
-        errors.clear()
-    }
 
-    fun validateEmail(email: String, l : EmailValidator.() -> Unit) : EmailValidator{
+
+    fun validateEmail(email: String?, l : EmailValidator.() -> Unit) : EmailValidator{
         return EmailValidator(email).apply(l)
     }
 
-    fun validatePassword(password: String, l : PasswordValidator.() -> Unit) : PasswordValidator{
+    fun validatePassword(password: String?, l : PasswordValidator.() -> Unit) : PasswordValidator{
         return PasswordValidator(password).apply(l)
     }
 
@@ -31,7 +29,12 @@ class InputValidator() {
         val errors = mutableListOf<String>()
 
         infix fun validate(v : InputValidator.() -> Unit) : InputValidator{
+            clearErrors()
             return InputValidator().apply(v)
+        }
+
+        fun clearErrors(){
+            errors.clear()
         }
     }
 
