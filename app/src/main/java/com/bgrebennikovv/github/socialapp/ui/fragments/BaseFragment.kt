@@ -8,13 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
 import com.bgrebennikovv.github.socialapp.ui.viewModels.AppSettingsViewModel
+import com.bgrebennikovv.github.socialapp.ui.viewModels.AuthViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 open class BaseFragment<T : ViewBinding>(
     private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> T
 ) : Fragment() {
 
     val settingsViewModel : AppSettingsViewModel by inject()
+    val authViewModel : AuthViewModel by viewModel()
 
     private var _binding : T? = null
     val binding get() = _binding!!
