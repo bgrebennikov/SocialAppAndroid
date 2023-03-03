@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.unauthorized.SignUpFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.unauthorized.SignUpFragment"
+    android:background="@color/bgColor"
+    android:isScrollContainer="true"
+    >
 
-    <TextView
+
+    <com.bgrebennikovv.github.inui.toolbar.InToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:title="Регистрация нового пользователя"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/signup_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Signup Fragment " />
+        android:layout_below="@+id/toolbar"
+        android:orientation="horizontal"
+        tools:layout="@layout/fragment_signup_full_name_page_base"
+        />
 
-</FrameLayout>
+
+</RelativeLayout>
