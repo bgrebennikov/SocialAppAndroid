@@ -10,16 +10,12 @@ import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavControlle
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
-import com.bgrebennikovv.github.socialapp.ui.viewModels.AuthViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ), KoinComponent {
-
-    private val authViewModel: AuthViewModel by viewModel()
 
     private val inAlert by lazy {
         InAlert(layoutInflater)
