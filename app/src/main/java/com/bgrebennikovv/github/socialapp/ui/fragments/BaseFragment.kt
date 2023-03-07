@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
 import com.bgrebennikovv.github.socialapp.ui.viewModels.AppSettingsViewModel
 import com.bgrebennikovv.github.socialapp.ui.viewModels.AuthViewModel
 import org.koin.android.ext.android.inject
@@ -36,10 +35,6 @@ open class BaseFragment<T : ViewBinding>(
         _binding = null
     }
 
-    fun setRootGraph(graphId : Int){
-        with(findRootNavController()){
-            graph = navInflater.inflate(graphId)
-        }
-    }
+
 
 }
