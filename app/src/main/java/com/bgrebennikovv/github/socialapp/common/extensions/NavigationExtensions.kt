@@ -13,3 +13,9 @@ fun Fragment.findRootNavController() : NavController{
     as NavHostFragment?
     return navHost?.navController ?: findNavController()
 }
+
+fun Fragment.setRootGraph(graphId : Int){
+    with(findRootNavController()){
+        graph = navInflater.inflate(graphId)
+    }
+}
