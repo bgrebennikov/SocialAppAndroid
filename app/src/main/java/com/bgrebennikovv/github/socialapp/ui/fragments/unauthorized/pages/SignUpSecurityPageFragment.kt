@@ -2,7 +2,6 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.pages
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.databinding.FragmentSignUpSecurityPageBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.SignUpSharedFragment
@@ -15,7 +14,6 @@ class SignUpSecurityPageFragment : SignUpSharedFragment<FragmentSignUpSecurityPa
         super.onViewCreated(view, savedInstanceState)
 
         binding.nextBtn.setOnClickListener {
-            Toast.makeText(context, authViewModel.email, Toast.LENGTH_SHORT).show()
             validator.validate {
 
                 validatePassword(binding.password.text.toString()) {
