@@ -3,6 +3,7 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.authorized
 import android.os.Bundle
 import android.view.View
 import com.bgrebennikovv.github.socialapp.R
+import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
 import com.bgrebennikovv.github.socialapp.databinding.FragmentUserProfileBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
 
