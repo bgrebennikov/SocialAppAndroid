@@ -16,13 +16,38 @@ class SignUpFullNamePageFragment : SignUpSharedFragment<FragmentSignupFullNamePa
 
         with(binding){
             nextBtn.setOnClickListener {
-                authViewModel.firstName = firstName.text.toString()
-                authViewModel.lastName = lastName.text.toString()
 
-                nextBtn.setButtonState(ButtonStates.LOADING)
+                validator.validate {
+
+                    validateText(binding.firstName.text.toString()){
+                        onError {
+                            binding.firstName.error = it
+                        }
+                    }
+
+                    validateText(binding.lastName.text.toString()){
+                        onError {
+                            binding.lastName.error = it
+                        }
+                    }
+
+                    onSuccessCheck {
+                        authViewModel.firstName = firstName.text.toString()
+                        authViewModel.lastName = lastName.text.toString()
+
+                        nextBtn.setButtonState(ButtonStates.LOADING)
+                        authViewModel.signUp()
+                    }
+
+                }
             }
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.nextBtn.setButtonState(ButtonStates.DEFAULT)
     }
 
 }
