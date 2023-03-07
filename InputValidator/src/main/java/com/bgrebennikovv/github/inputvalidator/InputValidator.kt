@@ -16,6 +16,10 @@ class InputValidator() {
         return PasswordValidator(password).apply(l)
     }
 
+    fun validateText(text: String?, fieldName: String? = null, l: TextValidator.() -> Unit) : TextValidator{
+        return TextValidator(text, fieldName).apply(l)
+    }
+
     infix fun onSuccessCheck(lambda: () -> Unit){
         if(errors.isEmpty()) {
             clearErrors()
