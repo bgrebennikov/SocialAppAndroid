@@ -53,5 +53,21 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
+    implementation "io.insert-koin:koin-android:3.3.2"
+
+    implementation("io.ktor:ktor-client-core:2.2.3")
+    implementation("io.ktor:ktor-client-cio:2.2.3")
+    implementation("io.ktor:ktor-client-okhttp:2.2.3")
+    implementation("io.ktor:ktor-serialization-gson:2.2.3")
+    implementation("io.ktor:ktor-client-content-negotiation:2.2.3")
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    implementation ('com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2')
+    implementation ('com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2')
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
+    implementation project(":InUI")
+    implementation project(":InputValidator")
 
 }

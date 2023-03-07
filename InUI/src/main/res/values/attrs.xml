@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DefaultStateButton">
+        <attr name="android:layout_width" format="dimension" />
+        <attr name="android:layout_height" format="dimension" />
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="text" format="string"/>
+
+        <attr name="button_state" format="enum">
+            <enum name="DEFAULT" value="0"/>
+            <enum name="LOADING" value="1"/>
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="InToolbar">
+        <attr name="title" format="string"/>
+        <attr name="subtitle" format="string"/>
+    </declare-styleable>
+
+
+</resources>

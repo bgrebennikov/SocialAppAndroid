@@ -1,16 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.unauthorized.LoginFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.unauthorized.LoginFragment"
+    android:padding="12dp"
+    android:background="@color/bgColor"
+    >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name_text"
+            android:textAlignment="center"
+            android:textSize="38sp"
+            android:textColor="@color/textColor"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_screen_app_description"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_text"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="12dp"
+            app:boxBackgroundColor="@color/edit_text_bg_color"
+            app:boxStrokeColor="@color/blue"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_text"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundColor="@color/edit_text_bg_color"
+            app:boxStrokeColor="@color/blue"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.bgrebennikovv.github.inui.DefaultStateButton.DefaultStateButton
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:text="@string/login_btn_text"
+            />
+
+    </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:textSize="36sp"
-        android:textColor="@color/black"
-        android:layout_height="match_parent"
-        android:text="Login Fragment" />
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_text"
+        android:textColor="@color/textColor"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="1dp"
+        android:layout_height="36dp"
+        app:dividerColor="@color/divider_color"
+        app:layout_constraintStart_toEndOf="@+id/sign_up"
+        app:layout_constraintEnd_toStartOf="@+id/restore_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/restore_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:text="@string/restore_password_text"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
