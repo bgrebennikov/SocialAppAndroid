@@ -7,6 +7,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.ConnectException
@@ -63,11 +64,19 @@ class UserApiRepositoryImpl(
         )
     }
 
+    override suspend fun isEmailCanJoin(request: SignUpEmailCheckRequest): BaseResponse<SignUpEmailCheckResponse> {
+        return makeRequest(
+            endpoint = Endpoints.EMAIL_CHECK,
+            request
+        )
+
+    }
 
 
     companion object{
         enum class Endpoints(val path: String){
-            LOGIN("/auth/login"), SIGNUP("/auth/signup")
+            LOGIN("/auth/login"), SIGNUP("/auth/signup"),
+            EMAIL_CHECK("auth/isEmailExists")
         }
     }
 
