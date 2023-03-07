@@ -2,15 +2,19 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
+import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
+import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
+import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentSignUpBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.adapters.SignUpPagerAdapter
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.pages.SignUpEmailPageFragment
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.pages.SignUpFullNamePageFragment
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.pages.SignUpSecurityPageFragment
-import com.bgrebennikovv.github.socialapp.ui.viewModels.Event
+import com.bgrebennikovv.github.socialapp.ui.viewModels.SignUpViewPagerEvent
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinComponent
@@ -44,16 +48,32 @@ class SignUpFragment : SignUpSharedFragment<FragmentSignUpBinding>(
         initToolbar()
         initViewPager()
 
-        authViewModel.eventsFlow
+        authViewModel.signupViewPagerFlow
             .onEach { event ->
                 when(event){
-                    is Event.GoNext -> {
+                    is SignUpViewPagerEvent.GoNext -> {
                         this.goNext()
                     }
-
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        authViewModel.getAuthResult().observe(viewLifecycleOwner){ response ->
+            when(response?.status){
+                StatusResponse.SUCCESS -> {
+                    setRootGraph(R.navigation.authorized_nav)
+                }
+                StatusResponse.API_ERROR -> {
+                    if(response.errors[0].field == "email") {
+                        binding.signupViewPager.currentItem = 0
+                        Toast.makeText(context, "Email already exists", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else -> {
+
+                }
+            }
+        }
 
     }
 
