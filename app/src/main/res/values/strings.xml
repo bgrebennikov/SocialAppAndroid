@@ -26,5 +26,9 @@
     <string name="email_already_exists">Пользователь с таким email уже зарегистрирован</string>
 
     <string name="repeat_password_error_message">Пароли должны быть одинаковыми</string>
+    <string name="main">Главная</string>
+    <string name="profile">Профиль</string>
+    <string name="messages">Сообщения</string>
+    <string name="groups">Сообщества</string>
 
 </resources>
