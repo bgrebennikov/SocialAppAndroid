@@ -3,11 +3,13 @@ package com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.pages
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.bgrebennikovv.github.inui.DefaultStateButton.ButtonStates
 import com.bgrebennikovv.github.socialapp.R
+import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentSignUpEmailPageBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.SignUpSharedFragment
 import com.bgrebennikovv.github.socialapp.ui.viewModels.EmailCheckEvent
@@ -20,16 +22,30 @@ class SignUpEmailPageFragment : SignUpSharedFragment<FragmentSignUpEmailPageBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch{
+        viewLifecycleOwner.lifecycleScope.launch {
             authViewModel.emailCheckFlow
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                .collect{ event ->
+                .collect { event ->
                     when (event) {
-                        EmailCheckEvent.OnStart -> binding.nextBtn.setButtonState(ButtonStates.LOADING)
-                        EmailCheckEvent.OnSuccess -> authViewModel.goNext()
-                        EmailCheckEvent.OnFailure -> binding.email.error =
-                            getString(R.string.email_already_exists)
-                        EmailCheckEvent.OnDone -> binding.nextBtn.setButtonState(ButtonStates.DEFAULT)
+                        is EmailCheckEvent.OnLoading -> btnSetLoading()
+                        is EmailCheckEvent.OnDone -> {
+                            when (event.response.status) {
+                                StatusResponse.SUCCESS -> {
+                                    if (event.response.response?.success == true) authViewModel.goNext()
+                                    else binding.email.error =
+                                        getString(R.string.email_already_exists)
+                                }
+                                StatusResponse.API_ERROR -> binding.email.error =
+                                    event.response.errors.first().message
+                                StatusResponse.EXCEPTION -> {
+                                    event.response.errors.firstOrNull()?.message?.let {
+                                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                else -> {}
+                            }
+                            btnSetDefault()
+                        }
                     }
 
                 }
@@ -49,8 +65,17 @@ class SignUpEmailPageFragment : SignUpSharedFragment<FragmentSignUpEmailPageBind
                     }
                 }
             }
+
         }
 
+    }
+
+    private fun btnSetLoading() {
+        binding.nextBtn.setButtonState(ButtonStates.LOADING)
+    }
+
+    private fun btnSetDefault() {
+        binding.nextBtn.setButtonState(ButtonStates.DEFAULT)
     }
 
 }

@@ -3,10 +3,7 @@ package com.bgrebennikovv.github.socialapp.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bgrebennikovv.github.socialapp.data.models.login.AuthResponse
-import com.bgrebennikovv.github.socialapp.data.models.login.BaseResponse
-import com.bgrebennikovv.github.socialapp.data.models.login.LoginRequest
-import com.bgrebennikovv.github.socialapp.data.models.login.SignupRequest
+import com.bgrebennikovv.github.socialapp.data.models.login.*
 import com.bgrebennikovv.github.socialapp.useCases.LoginUserUseCase
 import com.bgrebennikovv.github.socialapp.useCases.SignUpEmailCheckUseCase
 import com.bgrebennikovv.github.socialapp.useCases.SignUpUserUseCase
@@ -19,11 +16,9 @@ sealed class SignUpViewPagerEvent {
     object GoNext : SignUpViewPagerEvent()
 }
 
-sealed class EmailCheckEvent {
-    object OnSuccess : EmailCheckEvent()
-    object OnFailure : EmailCheckEvent()
-    object OnStart : EmailCheckEvent()
-    object OnDone : EmailCheckEvent()
+sealed class EmailCheckEvent() {
+    object OnLoading : EmailCheckEvent()
+    data class OnDone(val response: BaseResponse<SignUpEmailCheckResponse>) : EmailCheckEvent()
 }
 
 class AuthViewModel(
@@ -43,7 +38,7 @@ class AuthViewModel(
     private val signUpViewPagerEventChannel = Channel<SignUpViewPagerEvent>(Channel.BUFFERED)
     val signupViewPagerFlow = signUpViewPagerEventChannel.receiveAsFlow()
 
-    private val emailCheckEventChannel = Channel<EmailCheckEvent>(Channel.BUFFERED)
+    private val emailCheckEventChannel = Channel<EmailCheckEvent>(Channel.UNLIMITED)
     val emailCheckFlow = emailCheckEventChannel.consumeAsFlow()
 
 
@@ -69,13 +64,14 @@ class AuthViewModel(
 
     fun checkEmailExists(email: String) {
         viewModelScope.launch {
-            emailCheckEventChannel.send(EmailCheckEvent.OnStart)
-            val result = signUpEmailCheckUseCase.invoke(email)
 
-            if (result.response?.success == true) emailCheckEventChannel.send(EmailCheckEvent.OnSuccess)
-            else emailCheckEventChannel.send(EmailCheckEvent.OnFailure)
+            emailCheckEventChannel.send(EmailCheckEvent.OnLoading)
+            emailCheckEventChannel.send(
+                EmailCheckEvent.OnDone(
+                    signUpEmailCheckUseCase.invoke(email)
+                )
+            )
 
-            emailCheckEventChannel.send(EmailCheckEvent.OnDone)
         }
     }
 
