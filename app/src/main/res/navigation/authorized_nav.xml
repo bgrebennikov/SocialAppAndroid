@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/authorized_nav.xml"
-    app:startDestination="@id/userProfileFragment">
-
+    app:startDestination="@id/userHomeFragment">
     <fragment
-        android:id="@+id/userProfileFragment"
-        android:name="com.bgrebennikovv.github.socialapp.ui.fragments.authorized.UserProfileFragment"
-        android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_user_profile" />
+        android:id="@+id/userHomeFragment"
+        android:name="com.bgrebennikovv.github.socialapp.ui.fragments.authorized.UserHomeFragment"
+        android:label="fragment_user_home"
+        tools:layout="@layout/fragment_user_home" />
 </navigation>
