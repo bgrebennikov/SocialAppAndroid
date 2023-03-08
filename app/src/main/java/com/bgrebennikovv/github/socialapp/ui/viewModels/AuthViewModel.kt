@@ -3,11 +3,15 @@ package com.bgrebennikovv.github.socialapp.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bgrebennikovv.github.socialapp.data.models.login.*
+import com.bgrebennikovv.github.socialapp.data.models.login.AuthResponse
+import com.bgrebennikovv.github.socialapp.data.models.login.BaseResponse
+import com.bgrebennikovv.github.socialapp.data.models.login.LoginRequest
+import com.bgrebennikovv.github.socialapp.data.models.login.SignupRequest
 import com.bgrebennikovv.github.socialapp.useCases.LoginUserUseCase
 import com.bgrebennikovv.github.socialapp.useCases.SignUpEmailCheckUseCase
 import com.bgrebennikovv.github.socialapp.useCases.SignUpUserUseCase
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -16,8 +20,10 @@ sealed class SignUpViewPagerEvent {
 }
 
 sealed class EmailCheckEvent {
-    object OnSuccess: EmailCheckEvent()
-    object OnFailure: EmailCheckEvent()
+    object OnSuccess : EmailCheckEvent()
+    object OnFailure : EmailCheckEvent()
+    object OnStart : EmailCheckEvent()
+    object OnDone : EmailCheckEvent()
 }
 
 class AuthViewModel(
@@ -28,7 +34,7 @@ class AuthViewModel(
 
     private val authResult: MutableLiveData<BaseResponse<AuthResponse>?> =
         MutableLiveData<BaseResponse<AuthResponse>?>()
-    
+
     var email: String? = null
     var firstName: String? = null
     var lastName: String? = null
@@ -38,7 +44,7 @@ class AuthViewModel(
     val signupViewPagerFlow = signUpViewPagerEventChannel.receiveAsFlow()
 
     private val emailCheckEventChannel = Channel<EmailCheckEvent>(Channel.BUFFERED)
-    val emailCheckFlow = emailCheckEventChannel.receiveAsFlow()
+    val emailCheckFlow = emailCheckEventChannel.consumeAsFlow()
 
 
     fun goNext() {
@@ -61,11 +67,15 @@ class AuthViewModel(
         }
     }
 
-    fun checkEmailExists(email: String){
+    fun checkEmailExists(email: String) {
         viewModelScope.launch {
+            emailCheckEventChannel.send(EmailCheckEvent.OnStart)
             val result = signUpEmailCheckUseCase.invoke(email)
-            if(result.response?.success == true) emailCheckEventChannel.send(EmailCheckEvent.OnSuccess)
+
+            if (result.response?.success == true) emailCheckEventChannel.send(EmailCheckEvent.OnSuccess)
             else emailCheckEventChannel.send(EmailCheckEvent.OnFailure)
+
+            emailCheckEventChannel.send(EmailCheckEvent.OnDone)
         }
     }
 
