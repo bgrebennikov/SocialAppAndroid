@@ -6,7 +6,7 @@
     app:startDestination="@id/userHomeFragment">
     <fragment
         android:id="@+id/userHomeFragment"
-        android:name="com.bgrebennikovv.github.socialapp.ui.fragments.authorized.UserHomeFragment"
+        android:name="com.bgrebennikovv.github.socialapp.ui.fragments.authorized.UserHomeContainerFragment"
         android:label="fragment_user_home"
-        tools:layout="@layout/fragment_user_home" />
+        tools:layout="@layout/fragment_user_home_container" />
 </navigation>
