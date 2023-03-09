@@ -2,6 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_nav" >
+    android:id="@+id/root_nav">
     <include app:graph="@navigation/unauthorized_nav" />
+    <include app:graph="@navigation/user_home_nav" />
+    <include app:graph="@navigation/authorized_nav" />
 </navigation>

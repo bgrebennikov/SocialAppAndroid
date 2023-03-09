@@ -30,5 +30,6 @@
     <string name="profile">Профиль</string>
     <string name="messages">Сообщения</string>
     <string name="groups">Сообщества</string>
+    <string name="logout">Выйти</string>
 
 </resources>

@@ -7,7 +7,6 @@ import com.bgrebennikovv.github.inui.DefaultStateButton.ButtonStates
 import com.bgrebennikovv.github.inui.alerts.InAlert
 import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
-import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
@@ -52,7 +51,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     }
 
                     StatusResponse.SUCCESS -> {
-                        setRootGraph(R.navigation.authorized_nav)
+                        rootNavHost.navigate(
+                            LoginFragmentDirections.xml()
+                        )
                     }
                     else -> {
 

@@ -17,6 +17,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/xml"
+            app:destination="@id/authorized_nav.xml" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -30,5 +33,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/xml2"
+            app:destination="@id/authorized_nav.xml" />
     </fragment>
+    <include app:graph="@navigation/authorized_nav" />
 </navigation>

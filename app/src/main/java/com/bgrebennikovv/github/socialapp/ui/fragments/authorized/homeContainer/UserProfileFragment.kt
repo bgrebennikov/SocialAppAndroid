@@ -1,9 +1,8 @@
-package com.bgrebennikovv.github.socialapp.ui.fragments.authorized
+package com.bgrebennikovv.github.socialapp.ui.fragments.authorized.homeContainer
 
 import android.os.Bundle
 import android.view.View
 import com.bgrebennikovv.github.socialapp.R
-import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
 import com.bgrebennikovv.github.socialapp.databinding.FragmentUserProfileBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
 
@@ -17,7 +16,9 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(
 
         binding.logoutBtn.setOnClickListener {
             settingsViewModel.logoutUser{
-                setRootGraph(R.navigation.unauthorized_nav)
+                rootNavHost.navigate(
+                    R.id.unauthorized_nav,
+                )
             }
         }
     }
