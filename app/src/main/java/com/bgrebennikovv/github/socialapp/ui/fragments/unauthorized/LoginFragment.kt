@@ -7,7 +7,6 @@ import com.bgrebennikovv.github.inui.DefaultStateButton.ButtonStates
 import com.bgrebennikovv.github.inui.alerts.InAlert
 import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
-import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentLoginBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.BaseFragment
@@ -35,13 +34,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     StatusResponse.API_ERROR -> {
                         binding.loginBtn.setButtonState(ButtonStates.DEFAULT)
 
-                        inAlert{
+                        inAlert {
                             title = context?.getString(R.string.login_fail_message_title)
                             textColor = requireContext().getColor(R.color.textColor)
                             backgroundColor = requireContext().getColor(R.color.bgColor)
                             body = it.errors.first().message
 
-                            buttonText = requireContext().getString(R.string.login_close_alert_btn_text)
+                            buttonText =
+                                requireContext().getString(R.string.login_close_alert_btn_text)
                             onConfirm = {
                                 binding.password.text?.clear()
                                 dismiss()
@@ -52,7 +52,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     }
 
                     StatusResponse.SUCCESS -> {
-                        setRootGraph(R.navigation.authorized_nav)
+                        rootNavHost.navigate(
+                            LoginFragmentDirections.actionLoginFragmentToAuthorizedNav()
+                        )
                     }
                     else -> {
 

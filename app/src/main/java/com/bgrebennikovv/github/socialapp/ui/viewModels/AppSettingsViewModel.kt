@@ -35,5 +35,4 @@ class AppSettingsViewModel(
     private suspend fun checkUserAuthState(){
         userAuthState.value = getUserAuthStateUseCase.invoke()
     }
-
 }

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/home"
+    <item android:id="@+id/feedFragment"
         android:title="@string/main"
         />
-    <item android:id="@+id/groups"
-        android:title="@string/groups"
-        />
-    <item android:id="@+id/messages"
+    <item android:id="@+id/messagesFragment"
         android:title="@string/messages"
         />
-    <item android:id="@+id/profile"
+    <item android:id="@+id/userProfileFragment"
         android:title="@string/profile"
         />
 </menu>
