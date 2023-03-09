@@ -34,13 +34,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     StatusResponse.API_ERROR -> {
                         binding.loginBtn.setButtonState(ButtonStates.DEFAULT)
 
-                        inAlert{
+                        inAlert {
                             title = context?.getString(R.string.login_fail_message_title)
                             textColor = requireContext().getColor(R.color.textColor)
                             backgroundColor = requireContext().getColor(R.color.bgColor)
                             body = it.errors.first().message
 
-                            buttonText = requireContext().getString(R.string.login_close_alert_btn_text)
+                            buttonText =
+                                requireContext().getString(R.string.login_close_alert_btn_text)
                             onConfirm = {
                                 binding.password.text?.clear()
                                 dismiss()
@@ -52,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
                     StatusResponse.SUCCESS -> {
                         rootNavHost.navigate(
-                            LoginFragmentDirections.xml()
+                            LoginFragmentDirections.actionLoginFragmentToAuthorizedNav()
                         )
                     }
                     else -> {

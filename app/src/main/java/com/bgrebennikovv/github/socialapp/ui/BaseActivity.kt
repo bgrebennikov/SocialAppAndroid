@@ -18,7 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
     private val settingsViewModel by viewModel<AppSettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        settingsViewModel.userIsAuthenticated().observe(this@BaseActivity){ state ->
+        settingsViewModel.userIsAuthenticated().observe(this){ state ->
             val graphId : Int = if(state) R.navigation.authorized_nav else R.navigation.unauthorized_nav
             setRootGraph(graphId)
             return@observe

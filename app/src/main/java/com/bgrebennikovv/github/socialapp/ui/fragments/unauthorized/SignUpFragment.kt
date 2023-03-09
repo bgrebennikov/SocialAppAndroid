@@ -5,9 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
-import com.bgrebennikovv.github.socialapp.R
 import com.bgrebennikovv.github.socialapp.common.extensions.findRootNavController
-import com.bgrebennikovv.github.socialapp.common.extensions.setRootGraph
+import com.bgrebennikovv.github.socialapp.common.extensions.rootNavHost
 import com.bgrebennikovv.github.socialapp.data.models.login.StatusResponse
 import com.bgrebennikovv.github.socialapp.databinding.FragmentSignUpBinding
 import com.bgrebennikovv.github.socialapp.ui.fragments.unauthorized.adapters.SignUpPagerAdapter
@@ -61,7 +60,9 @@ class SignUpFragment : SignUpSharedFragment<FragmentSignUpBinding>(
         authViewModel.getAuthResult().observe(viewLifecycleOwner){ response ->
             when(response?.status){
                 StatusResponse.SUCCESS -> {
-                    setRootGraph(R.navigation.authorized_nav)
+                    rootNavHost().navigate(
+                        SignUpFragmentDirections.actionSignUpFragmentToAuthorizedNav()
+                    )
                 }
                 StatusResponse.API_ERROR -> {
                     if(response.errors[0].field == "email") {

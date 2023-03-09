@@ -6,12 +6,12 @@ import com.bgrebennikovv.github.socialapp.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
-    private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
+    private var _binding : ActivityMainBinding? = null
+    val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
